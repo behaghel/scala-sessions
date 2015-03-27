@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>Scala Sessions</title>
+  </head>
+  <body>
+
+    <div>
+      <h2>Welcome!</h2>
+      <p>Let's give a try to Activator tutorial capability :-)</p>
+      <p>Please click on the arrow on the left panel to move onto the next section.</p>
+    </div>
+
+    <div>
+      <h2>Session 0: Warm Up</h2>
+      <p>You'll find solutions to the problem we were working on in
+        <a href="#code/src/main/scala/PrimeNumbers.scala">
+          src/main/scala/PrimeNumbers.scala
+        </a>
+      </p>
+      <p>The first object <code>Euler3</code> solves
+        the <a href="https://projecteuler.net/problem=3">third problem
+          on Project Euler</a> but requires a function that takes an
+        integer and return a sequence of all the prime numbers up to
+        that number. We will use that to see various approaches to
+        building this function.</p>
+
+      <p>The most ancient algorithm to build such function is
+        the <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve
+          of Eratosthene</a>. I have been asked at the end of last
+        session to provide a functional implementation of it. Let's
+        study that.</p>
+      <p>Have a look at the 3 different approaches in
+        the <code>Eratosthene</code> object.
+        <ul>
+          <li>The first one <code>primesImperative</code>, I would expect to
+            be close in essence to what you would call a good old imperative
+            implementation.</li>
+          <li>Then we have <code>primesMRS</code> with MRS standing
+            for <i>Map Reduce Style</i>. Here we have given up on
+            performance utterly at least in a mono-thread processing.
+            Still, it's functional and it's worth knowing as it's
+            highly parallelisable. We shall review that once we know
+            how to do it.</li>
+          <li>Last but not least <code>primesSPS</code> for <i>State
+            Passing Style</i>. Another to name would probably
+            be <i>the recursive solution</i>. But first, functional
+            programmers aren't that big of fans of recursivity. That
+            may surprises you but yeah, FP coders know better. And
+            soon you will too! Second, that doesn't convey the key
+            move of this technique. You'd better learn right now
+            that state encapsulation is no panacea.
+      </ul></p>
+      
+      <p>Now have a look at my approach with <code>object
+          Hubert</code>. Simple, elegant and yes, fast[1]. That gives us
+        Eratosthenes — 0, Euler — 0, Hubert — 1. Now tell me why I am
+        the one who doesn't have a dedicated Wikipedia page.</p>
+
+      <p>Check this out
+        in <a href="#code/src/test/scala/PrimeNumbersBenchmark.scala">PrimeNumbersBenchmark.scala</a>.
+        It
+        uses <a href="http://scalameter.github.io/home/gettingstarted/0.7/index.html">scalameter</a>.
+        I discovered it while preparing this session. Since some of us
+        want to pay a particular attention to performance, having it
+        handy is a very good idea. Performance on the JVM is hard to
+        measure. To learn more on how scalameter helps and the caveats
+        of JVM microbenchmarking, read through its documentation.</p>
+
+        <p>In this benchmark, you'll see first a series of run of each
+        version of the sieve of Eratosthenes. Each series starts from 30
+        up to 1000 with a step of 75.</p>
+
+        <p>Then you'll see how each performs on Euler problem #3 but with
+        a significantly smaller number. Finally we are benchmarking my
+        solution on the real number from problem #3.</p>
+
+      <button data-exec="test-only session0.PrimeNumbersBenchmark">See
+        for yourself</button> (click then head over the <i>Build</i> tab
+      on the left panel, section <strong>Develop</strong>)
+
+      <p>If you have a lot of time or your room is a bit cold and you
+        fancy some CPU-powered heat, you can try the other methods
+        in <code>Eratosthenes</code> on the real number. More
+        interesting, try with your own solution.</p>
+
+
+      <p>[1] Well on my machine it's ~18 seconds. But that's the thing
+        with prime decomposition right? It's hard and slow, that's why
+        cryptography loves it. Now ask Eratosthenes to solve it,
+        millenaries is probably an overstatement but you'll definitively
+        look older and not necessarily wiser.<p>
+
+    </div>
+
+    <address>
+      <a href="mailto:behaghel@gmail.com">Hubert Behaghel</a>
+    </address>
+  </body>
+</html>
