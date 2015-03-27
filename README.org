@@ -1,0 +1,31 @@
+#+TITLE: Scala Sessions
+#+AUTHOR: Hubert Behaghel
+#+EMAIL: behaghel@gmail.com
+#+LANGUAGE: en
+#+OPTIONS: H:4 toc:3 ^:{}
+
+* Motivation
+
+This is a set of exercises and code material for learning Scala. 
+
+* Getting Started
+
+This project uses the [[https://typesafe.com/get-started][Typesafe Activator]] (~brew install activator~ on
+OS X). Once you have it:
+- clone
+- ~cd scala-sessions~
+- ~activator ui~
+- Open the tutorial and become a better coder.
+  
+
+* Contributing
+
+Only PRs that fix something wrong will be accepted. If you want to
+suggest a new solution, share it on Slack #scala for discussion.
+
+If you want a particular aspect of Scala to be covered, feel free to
+file an issue.
+
+* Maintainer
+
+Hubert Behaghel, Principal Software Engineer for Online Sales and Services.
