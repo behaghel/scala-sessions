@@ -1,0 +1,72 @@
+#+TITLE: Session 2
+#+AUTHOR: Hubert Behaghel
+#+EMAIL: behaghel@gmail.com
+#+LANGUAGE: en
+#+OPTIONS: H:4 toc:3 ^:{}
+#+COLUMNS: %25ITEM %TAGS %PRIORITY %TODO
+#+LATEX_HEADER: \usepackage[usenames,hyperref]{xcolor}
+#+LATEX_CLASS_OPTIONS: [colorlinks, linkcolor=red, urlcolor=blue]
+
+* Session 2: teacher notes
+
+- remember: you're supposed to ask questions!
+- correct exercises
+- recap: anatomy of a function in Scala
+- define
+  - purity,
+  - referential transparency,
+  - composability,
+  - tail call, @tailrec
+  - higher-order function
+- Polymorphic function and type-driven development
+#+BEGIN_SRC scala
+def isSorted[A](as: Array[A], ordered: (A,A) => Boolean): Boolean
+def partial1[A,B,C](a: A, f: (A,B) => C): B => C
+def compose[A,B,C](f: B => C, g: A => B): A => C
+#+END_SRC
+- Functional data structures
+#+BEGIN_SRC scala
+package session2
+
+sealed trait List[+A]
+object Nil extends List[Nothing]
+case class Cons[+A](head: A, tail: List[A]) extends List[A]
+
+object List {
+  def apply[A](as: A*): List[A] =
+    if (as.isEmpty) Nil else Cons(as.head, apply(as.tail: _*))
+}
+#+END_SRC
+- pattern matching
+#+BEGIN_SRC scala
+// in List companion object
+def sum(is: List[Int]): Int
+// tail, setHead, drop, dropWhile, append
+// init
+#+END_SRC
+- generalising with HOFs
+#+BEGIN_SRC scala
+// observe sum, implement product and try to generalise both into:
+def foldRight[A,B](as: List[A], z: B)(f: (A,B) => B): B
+#+END_SRC
+
+- for next week:
+  - can foldRight immediately halt if it encounters 0.0?
+  - what if you pass Nil and Cons to foldRight? What does it says
+    about foldRight?
+  - length using foldRight
+  - foldLeft tail-recursive
+  - sum, product using foldLeft
+  - reverse
+  - foldLeft in terms of foldRight. Other way around.
+  - append in terms of fold (one of them)
+  - flatten with O(n) where n = sum of all lengths.
+  - inc(ints: List[Int]): List[Int]
+  - stringify(doubles: List[Double]): List[String]
+  - generalise inc and stringify into map
+  - filter
+  - flatMap
+  - filter using flatMap
+  - takes 2 List[Int] and return a List with corresponding elements
+    being summed
+  - generalise into zipWith

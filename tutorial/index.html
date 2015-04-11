@@ -208,10 +208,102 @@
 
     <div>
       <h2>Session 2: Fun Prog</h2>
-      <pre><code>object Code {
-  val foo = "bar"
-  throw new UnsupportedException("see you soon!")
-}<code></pre>
+      <p>
+        Head over
+        to <code><a href="#code/src/main/scala/List.scala">List.scala</a></code>
+        and fill in the <code>???</code>.
+      </p>
+      <p>
+        Start with the methods in the trait. Try to figure what sort
+        of method should go there and why for
+        instance <code>sum</code> is not at this place but in the <i>companion object</i> instead.
+      </p>
+      <p>
+        Then implement <code>sum</code> and <code>product</code> in
+        the companion then observe both implementations along with
+        others in the trait. Extract the commonality into a function:
+      </p>
+      <pre><code>
+          def foldRight(z: B)(f: (A, B) => B): B
+      </pre></code>
+      <p>
+        Where should you put this method?
+      </p>
+      <p>
+        Appreciate the power of <i>HOFs</i> (Higher-Order Functions)
+        to remove boilerplate. What you have done is
+        a <i>generalisation</i>. In OOP, you have learnt that you need
+        to <i>refactor</i> your code. You don't have a very strict
+        definition of what refactored should look like but roughly
+        speaking, it's about keeping it tidy. When you see fit, you
+        apply <a href="http://www.amazon.co.uk/dp/0201485672 ">few
+        techniques</a>, you also pay attention to named design
+        principles like Don't Repeat Yourself or the Open-Close
+        Principle. Well in FP, we generalise as much as we can, that
+        means we create Higher-Order functions (abstract over
+        operations) and/or polymorphic function (abstract over type).
+        We call that sometimes <i>wholemeal programming</i>. That's
+        the reason why I was saying earlier that recursivity is not
+        the favourite tool for FP coders: you can capture that once
+        and for all into a function. Actually you just did.
+      </p>
+      <p>
+        <code>foldRight</code> is special. We call it
+        a <i>catamorphism</i> for the type <code>List</code>. To see
+        it in action, use it with <code>Nil</code> and <code>Cons(_,
+        _)</code>. Interesting to say the list… hu the least! All
+        operations on <code>List</code> can be expressed
+        using <code>foldRight</code>. Try that if you're not
+        convinced! All that you've implemented so far can be expressed
+        with it.
+      </p>
+      <p>
+        Use it to implement <code>length</code>. Remember from now on
+        that it's not a cheap operation
+        on <code>List</code>. <tt><i>O(n)</i></tt> indeed.
+      </p>
+      <p>
+        Now there is something unfortunate
+        with <code>foldRight</code>. Can you see it? Try with a very
+        big List and you'll see. Now work on its sister and fix this issue:
+      </p>
+      <pre><code>
+          def foldLeft(z: B)(f: (B, A) => B): B
+      </pre></code>
+      <p>
+        As an exercise, implement <code>foldRight</code> in terms
+        of <code>foldLeft</code>.
+      </p>
+      <p>
+        More functions for your type <code>List</code>:
+      </p>
+      <pre><code>
+          def flatten[A](xxs: List[List[A]]): List[A] // must run in O(n)
+          def map[B](f: A => B): List[B]
+          def filter(p: A => Boolean): List[A]
+          def flatMap[B](f: A => List[B]): List[B] // try using this one to implement filter
+          def zipWith[B](that: List[A])(f: (A, A) => B): List[B] // eg List(1,2,3).zipWith(List(4,5,6))(_ + _) == List(5,7,9)
+          def hasSubsequence(sub: List[A]): Boolean // this one is hard
+      </pre></code>
+      
+      <p>
+        You're now very close to a fully functional (in several ways)
+        List implementation. If you're curious enough, you can compare
+        what you have
+        with <a href="https://github.com/scala/scala/blob/2.11.x/src/library/scala/collection/immutable/List.scala">the
+          List in Scala Standard Library</a>.
+      </p>
+      <p>
+        The exact same approach we followed here would work for
+        defining a binary <code>Tree[+A]</code> and many more. Try
+        building the ADT for it, that is the <code>sealed trait</code>
+        and the <i>data constructors</i> that extend it.
+      </p>
+    </div>
+
+    <div>
+      <h2>Go Reactive</h2>
+      <p><a href="https://class.coursera.org/reactive-002">Coursera Course</a> — week 1.</p>
     </div>
 
     <address>
