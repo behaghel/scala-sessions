@@ -21,11 +21,11 @@ OS X). Once you have it:
 * Contributing
 
 Only PRs that fix something wrong will be accepted. If you want to
-suggest a new solution, share it on Slack #scala for discussion.
+suggest a new solution, share it using Gist or something similar.
 
 If you want a particular aspect of Scala to be covered, feel free to
 file an issue.
 
 * Maintainer
 
-Hubert Behaghel, Principal Software Engineer for Online Sales and Services.
+Hubert Behaghel, @behaghel on Twitter.
